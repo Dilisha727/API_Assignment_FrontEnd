@@ -121,7 +121,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-const MapComponent = ({ weatherData }) => {
+const MapComponent = ({ weatherData, searchedCity }) => {
   return (
     <MapContainer
       center={[7.8731, 80.7718]}
@@ -129,51 +129,29 @@ const MapComponent = ({ weatherData }) => {
       style={{ height: "700px", width: "70%" }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {weatherData.map(
-        ({
-          id,
-          city,
-          latitude, // Ensure correct key names
-          longitude, // Ensure correct key names
-          temperature,
-          humidity,
-          airPressure,
-          wind_speed,
-          weatherDescriptions,
-          observationTime,
-          weatherIcons,
-          isDay,
-        }) => {
-          const dynamicIcon = new L.Icon({
-            iconUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBEoLYTPXf1WPVMlbugOAXoO_yvD7N_QIrbQ&s",
-            iconSize: [30, 30],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-          });
+      {weatherData.map(({ id, city, latitude, longitude, temperature, humidity, airPressure }) => {
+        const dynamicIcon = new L.Icon({
+          iconUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBEoLYTPXf1WPVMlbugOAXoO_yvD7N_QIrbQ&s",
+          iconSize: [30, 30],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+        });
 
-          return (
-            <Marker key={id} position={[latitude, longitude]} icon={dynamicIcon}>
-              <Popup>
-                <strong>{city}</strong>
-                <br />
-                <br />
-                Temperature: {temperature}°C
-                <br />
-                Humidity: {humidity}%
-                <br />
-                Air Pressure: {airPressure} hPa
-                <br />
-                Wind Speed: {wind_speed} km/h
-                <br />
-                Weather: {weatherDescriptions}
-                <br />
-                Observation Time: {observationTime}
-                <br />
-              </Popup>
-            </Marker>
-          );
-        }
-      )}
+        return (
+          <Marker key={id} position={[latitude, longitude]} icon={dynamicIcon}>
+            <Popup>
+              <strong>{city}</strong>
+              <br />
+              <br />
+              Temperature: {temperature}°C
+              <br />
+              Humidity: {humidity}%
+              <br />
+              Air Pressure: {airPressure} hPa
+            </Popup>
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
 };
