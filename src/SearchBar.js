@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles.css"; // Import the CSS file
 
 const SearchBar = ({ handleSearch }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -14,7 +15,7 @@ const SearchBar = ({ handleSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="search-bar">
       <input
         type="text"
         placeholder="Enter city name"

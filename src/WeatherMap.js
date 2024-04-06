@@ -7,13 +7,14 @@ import Foggy from "./image/Foggy.png";
 import Windy from "./image/Windy.png";
 import Sunny from "./image/Sunny.png";
 import rain from "./image/rain.png";
+import "./styles.css"; // Import the CSS file
 
 const MapComponent = ({ weatherData, searchedCity }) => {
   return (
     <MapContainer
       center={[7.8731, 80.7718]}
       zoom={8}
-      style={{ height: "700px", width: "70%" }}
+   style={{ pading : 10 ,height: "800px" }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {weatherData.map(({ id, city, latitude, longitude, temperature, humidity, airPressure, description }) => {
@@ -41,7 +42,7 @@ const MapComponent = ({ weatherData, searchedCity }) => {
 
         const dynamicIcon = new L.Icon({
           iconUrl: iconUrl,
-          iconSize: [40, 40],
+          iconSize: [60, 60],
           iconAnchor: [12, 41],
           popupAnchor: [1, -34],
         });
